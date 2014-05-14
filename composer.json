@@ -1,0 +1,22 @@
+{
+    "name": "osucomm/ws-soap",
+    "type": "library",
+    "description": "Extends the PHP SOAP client to add basic WSSE support",
+    "keywords": [ "soap", "soap-client" ],
+    "homepage": "https://github.com/osucomm/WsSoap",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Corey Hinshaw",
+            "email": "hinshaw.25@osu.edu"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "ext-soap": "*",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": { "WsSoap\\": "src/" }
+    }
+}
