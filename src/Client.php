@@ -8,14 +8,14 @@
 
 namespace WsSoap;
 
-class Client extends SoapClient {
+class Client extends \SoapClient {
     private $wsUsername;
     private $wsPassword;
     private $wsse;
 
     public function __construct($wsdl, array $options) {
         if (empty($options['wsUsername']) || empty($options['wsPassword']))
-            throw new InvalidArgumentException('wsUsername and wsPassword must be supplied in the options array.');
+            throw new \InvalidArgumentException('wsUsername and wsPassword must be supplied in the options array.');
 
         $this->wsUsername = $options['wsUsername'];
         $this->wsPassword = $options['wsPassword'];
@@ -26,16 +26,16 @@ class Client extends SoapClient {
     }
 
     private function addWsHeader() {
-        $soapVarUser = new SoapVar($this->wsUsername, XSD_STRING, null, $this->wsse, null, $this->wsse);
-        $soapVarPass = new SoapVar($this->wsPassword, XSD_STRING, null, $this->wsse, null, $this->wsse);
+        $soapVarUser = new \SoapVar($this->wsUsername, XSD_STRING, null, $this->wsse, null, $this->wsse);
+        $soapVarPass = new \SoapVar($this->wsPassword, XSD_STRING, null, $this->wsse, null, $this->wsse);
 
-        $wsseAuth = new \WsSoap\WSSEAuth($soapVarUser, $soapVarPass);
-        $soapVarWsseAuth = new SoapVar($wsseAuth, SOAP_ENC_OBJECT, null, $this->wsse, 'UsernameToken', $this->wsse);
-        $wsseToken = new \WsSoap\WSSEToken($soapVarWsseAuth);
-        $soapVarWsseToken = new SoapVar($wsseToken, SOAP_ENC_OBJECT, null, $this->wsse, 'UsernameToken', $this->wsse);
-        $soapVarHeaderVal = new SoapVar($soapVarWsseToken, SOAP_ENC_OBJECT, null, $this->wsse, 'Security', $this->wsse);
+        $wsseAuth = new WSSEAuth($soapVarUser, $soapVarPass);
+        $soapVarWsseAuth = new \SoapVar($wsseAuth, SOAP_ENC_OBJECT, null, $this->wsse, 'UsernameToken', $this->wsse);
+        $wsseToken = new WSSEToken($soapVarWsseAuth);
+        $soapVarWsseToken = new \SoapVar($wsseToken, SOAP_ENC_OBJECT, null, $this->wsse, 'UsernameToken', $this->wsse);
+        $soapVarHeaderVal = new \SoapVar($soapVarWsseToken, SOAP_ENC_OBJECT, null, $this->wsse, 'Security', $this->wsse);
 
-        $wsHeader = new SoapHeader($this->wsse, 'Security', $soapVarHeaderVal, true);
+        $wsHeader = new \SoapHeader($this->wsse, 'Security', $soapVarHeaderVal, true);
         $this->__setSoapHeaders(array($wsHeader));
     }
 }
