@@ -25,7 +25,7 @@ Then create a `composer.json` file with the following contents:
 
     {
         "require": {
-            "osucomm/ws-soap": "dev-master"
+            "osucomm/ws-soap": "~0.1"
         }
     }
 
