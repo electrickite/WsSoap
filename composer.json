@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Extends the PHP SOAP client to add basic WSSE support",
     "keywords": [ "soap", "soap-client" ],
-    "homepage": "https://github.com/osucomm/WsSoap",
+    "homepage": "https://github.com/electrickite/WsSoap",
     "license": "MIT",
     "authors": [
         {
